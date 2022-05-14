@@ -1,11 +1,10 @@
-import os
-from tkinter import (W, X, Y, Tk, Label, Frame, LabelFrame, Radiobutton, Button, PhotoImage,
+import copy
+from tkinter import (W, X, Y, Listbox, Tk, Label, Frame, LabelFrame, Radiobutton, Button,
                      IntVar, BOTH, BOTTOM, NORMAL, DISABLED)
 
 LARGE_LARGE_FONT = ("Segoe UI", 30, "bold")
 LARGE_FONT = ("Segoe UI", 16, "bold")
 NORM_FONT = ("Segoe UI", 26, "bold")
-SMALL_FONT = ("Segoe UI", 8)
 
 WHITE, GREY, DARK_GREY, BLACK, RED, BLUE, GREEN, PURPLE = ("#ffffff",  # WHITE
                                                            "#bcbcbc",  # GREY
@@ -30,13 +29,14 @@ class UI:
         self.cached_radio_options = {}
         self.current_page = 0
         self.current_name = ""
+        self.reached_end = False
 
         self.present_participants_dict: dict = None
         self.setup()
 
     def setup(self) -> None:
 
-        self.frame1 = Label(self.root, bg='#B71C1C', borderwidth=0)
+        self.frame1 = Label(self.root, bg=DARK_GREY, borderwidth=0)
         self.frame1.pack()
 
         self.choices_frame = LabelFrame(
@@ -65,8 +65,9 @@ class UI:
         self.next_btn.grid(row=0, column=1, padx=15)
 
         self.submit_btn = Button(
-            self.buttons_grid, text="Submit", command=self.next_page, font=NORM_FONT,
-            width=BUTTON_WIDTH, height=BUTTON_HEIGHT, bg=GREEN, borderwidth=0)
+            self.buttons_grid, text="Submit", command=self.submit_form, font=NORM_FONT,
+            width=BUTTON_WIDTH, height=BUTTON_HEIGHT, bg=GREEN, borderwidth=0,
+            state=DISABLED)
         self.submit_btn.grid(row=0, column=2, padx=15)
 
     def add_radio_button(self, text: str, var: IntVar, value: int, color: int = GREY) -> None:
@@ -92,6 +93,8 @@ class UI:
 
     def next_page(self) -> None:
         self.current_page += 1
+        if self.current_page == len(self.matched_participants) - 1:
+            self.reached_end = True
         self.display()
 
     def prev_page(self) -> None:
@@ -102,6 +105,7 @@ class UI:
         self.clear_radio_buttons()
 
         self.current_name = self.matched_participants[self.current_page]
+        print(self.current_page, len(self.matched_participants), self.current_name)
 
         var = IntVar(
         ) if not self.current_name in self.cached_radio_options else self.cached_radio_options[self.current_name]
@@ -114,8 +118,8 @@ class UI:
         self.next_btn['state'] = DISABLED if self.current_page == len(
             self.matched_participants) - 1 else NORMAL
 
-        if True:
-            self.submit_btn['state'] = DISABLED
+        if self.reached_end:
+            self.submit_btn['state'] = NORMAL
 
         self.choices_frame.config(text=self.current_name)
 
@@ -133,6 +137,7 @@ class UI:
 
     def start(self, present_participants_dict: dict) -> None:
         self.present_participants_dict = present_participants_dict
+        self.archive_dict = dict(present_participants_dict)
         self.matched_participants = self.update_matched_participants()
         self.display()
         self.root.mainloop()
@@ -141,3 +146,11 @@ class UI:
         self.matched_participants = list(self.present_participants_dict.keys())
         self.matched_participants.sort()
         return self.matched_participants
+
+    def submit_form(self) -> None:
+        print("[")
+        for name in self.matched_participants:
+            selected_option = self.cached_radio_options[name].get()
+            print(
+                f"""["{name}",          "{self.archive_dict[name][selected_option]}"],""")
+        print("]")
