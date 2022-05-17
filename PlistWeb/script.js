@@ -202,7 +202,7 @@ function generateForm() {
         selectedName = Questions[questionNumber][1][selectedOption];
 
         if (!(selectedName === "  ")) {
-          results += `${participantName}, ${selectedName}\n`;
+          results += `${participantName} | ${selectedName}\n`;
         }
       });
 
