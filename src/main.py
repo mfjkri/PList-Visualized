@@ -30,6 +30,9 @@ def updated_attendee_txt(present_participants_dict: dict) -> None:
     attendees_json = os.path.join("PlistWeb", "attendees.txt")
 
     matched_registered = list(present_participants_dict.keys())
+
+    print("Matched participants:", len(matched_registered))
+
     matched_registered.sort()
 
     file_lines = ["{\n"]
