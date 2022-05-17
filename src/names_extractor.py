@@ -1,107 +1,11 @@
 import os
 from bs4 import BeautifulSoup
 
-PARTICIPANTS = [
-
-    "Tai Swet Geok",
-    "Lim Chek Boon",
-    "Liu Qingqun",
-    "Desmond Yao",
-    "Hair Wen Quan Ricky",
-    "Christina Ng",
-    "Chiok Pei Yu",
-    "Muhammad Mubarak s/o Syed Ahmad",
-    "Ernest Ng Er Rui",
-    "Kwong Kok Chan",
-    "Lim Dao Xian",
-    "Chieng chiew sek",
-    "Andy Chew Hesheng",
-    "Chia Hon Kit",
-    "GOH YI HUI",
-    "Co Hao Zhong James",
-    "Daniel Shi Chee Sing",
-    "Lee Jen Xiong",
-    "WU HONG YU",
-    "Mani Rajasekaran",
-    "Samuel Har Enqi",
-    "Ervin Yeo",
-    "Muhammad Nur Aiman",
-    "Toh Aik Meng",
-    "Chen Churong",
-    "Kwang Sai Weng",
-    "Pey Jin Yong",
-    "Gregory Tan",
-    "Issac Gwee",
-    "Goh Soon Hua",
-    "Ethan Lim",
-    "Alex Lee",
-    "Faayiz Firros",
-    "Lye Han Wei",
-    "ERIC KOH",
-    "Lee Wei Zhi Jonathan",
-    "Bhashyakarla Divya",
-    "Lucy Tan",
-    "Wong Nyuk Ling",
-    "Gan Wei Chun",
-    "Ivan Lee",
-    "Ho Pui Jee",
-    "Boey sin yee",
-    "Tan Sean",
-    "Chester Chua Chee Siong",
-    "Tan Jing Han Chad",
-    "CHUA XIAN ZHONG",
-    "Lee Jun Yi, Joshua",
-    "Tan Inn Fung",
-    "Lim Teck Woon, Darren",
-    "TAN CHIN HOUW BENJAMIN",
-    "Gilbert Lim",
-    "Teo Yong Jie",
-    "Tan Li Min Krystle",
-    "Wang Ngiap Weng",
-    "Zhao Taige",
-    "Mak Hui Ting Clarisse",
-    "Ng Kang Xiu Joshua",
-    "TAY ZHI WEI",
-    "Gu Miaoheng Raymond",
-    "Cheow Eng Ho",
-    "Kwek Li Gek",
-    "Lee Xuanyun Calista",
-    "Chua Charn Hao, Wilson",
-    "Benjamin Chua Rui Hern",
-    "Kok Yong Leonard Lee",
-    "Zeng Jiancheng",
-    "Philip Ng",
-    "Ang Siok Teng Serene",
-    "Lee Chin Leong",
-    "Tan kuan wee",
-    "Tan Kiat Seng",
-    "Ong min lwin",
-    "Chiang chee pun",
-    "Lee Jia Wei",
-    "Sng Shao Perng",
-    "Garrick Goh",
-    "Khoo Kai Yun Kelvin",
-    "Kelvin Loh Wei Keong",
-    "Law Bee Hua",
-    "LIAU YEE XIANG",
-    "Ng Koh Yew",
-    "Tay Lim Hock",
-    "Sean Lai Kuok Shen",
-    "Shi Chee Yeong, John",
-    "Lum Jin Xian",
-    "Andre Thong",
-    "Christopher Anthony",
-    "Ong Jun Heng, James",
-    "Alan Maguicay",
-    "Ng Choong Hwee",
-    "Angie Ang",
-    "Wong ray mern peter",
-]
 PLIST_DIR = os.path.join("PlistHtml")
 PLIST_FILE_NAMES = os.listdir(PLIST_DIR)
 
 
-def get_names_that_matches_participants() -> dict:
+def get_names_that_matches_participants(participants: list) -> dict:
 
     attendees_set = set()
 
@@ -120,7 +24,7 @@ def get_names_that_matches_participants() -> dict:
 
     present_participants_dict = {}
 
-    for participant in PARTICIPANTS:
+    for participant in participants:
         name_segments = participant.split(' ')
 
         for segment in name_segments:
