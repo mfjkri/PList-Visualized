@@ -3,6 +3,14 @@ import argparse
 import subprocess
 import sys
 
+
+def get_dir_or_create(dir_str: str) -> str:
+    dir_path = os.path.join(os.getcwd(), dir_str)
+    if not os.path.isdir(dir_path):
+        os.mkdir(dir_path)
+    return dir_path
+
+
 if __name__ == "__main__":
 
     is_windows, is_linux = "win32" in sys.platform, "linux" in sys.platform
@@ -16,6 +24,14 @@ if __name__ == "__main__":
 
         prjDir = os.getcwd()
         os.chdir(prjDir)
+
+        # -------------------- Creating directories -------------------- #
+        get_dir_or_create("PlistHtml", True)
+
+        participants_yaml_file = os.path.join("participants.yaml")
+        with open(participants_yaml_file, "w") as file:
+            file.writelines([""])
+        # ------------------------------------- - ------------------------------------ #
 
         # ------------------------------------- - ------------------------------------ #
 
