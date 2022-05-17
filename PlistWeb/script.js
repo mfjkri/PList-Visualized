@@ -201,7 +201,9 @@ function generateForm() {
         participantName = Questions[questionNumber][0];
         selectedName = Questions[questionNumber][1][selectedOption];
 
-        results += `${participantName}, ${selectedName}\n`;
+        if (!(selectedName === "  ")) {
+          results += `${participantName}, ${selectedName}\n`;
+        }
       });
 
       download("output.csv", results);
