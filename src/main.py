@@ -3,7 +3,7 @@ import yaml
 
 from typing import (Union, Any)
 from names_extractor import get_names_that_matches_participants
-from ui import UI
+# from ui import UI
 
 
 PARTICIPANTS_FILE = os.path.join("participants.yaml")
