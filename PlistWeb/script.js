@@ -186,7 +186,7 @@ function generateForm() {
   });
 
   submitBtn.addEventListener("click", () => {
-    results = "Participant Name, Webex Username\n";
+    results = "Participant Name|Webex Username\n";
 
     if (checkOptionFilled(submitBtn, stateNumber)) {
       selectedOptions = {};
@@ -202,7 +202,7 @@ function generateForm() {
         selectedName = Questions[questionNumber][1][selectedOption];
 
         if (!(selectedName === "  ")) {
-          results += `${participantName} | ${selectedName}\n`;
+          results += `${participantName}|${selectedName}\n`;
         }
       });
 
