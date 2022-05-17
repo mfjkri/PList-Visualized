@@ -26,7 +26,7 @@ if __name__ == "__main__":
         os.chdir(prjDir)
 
         # -------------------- Creating directories -------------------- #
-        get_dir_or_create("PlistHtml", True)
+        get_dir_or_create("PlistHtml")
 
         participants_yaml_file = os.path.join("participants.yaml")
         with open(participants_yaml_file, "w") as file:
