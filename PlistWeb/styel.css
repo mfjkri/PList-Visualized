@@ -1,0 +1,321 @@
+:root {
+    --primary-color: rgb(255, 112, 17);
+    --primary-color-2: rgb(175, 55, 0);
+    --background-color: rgba(0, 0, 0); 
+    --background-color-2: rgb(182, 182, 182); 
+    --constrasting-color-1: rgb(255, 255, 255);
+    --constrasting-color-2: rgba(200, 200, 200);
+
+    /* --background-color: rgba(255, 255, 255); 
+    --font-color: rgba(0, 0, 0); */
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* --------------------------------- Global --------------------------------- */
+body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    min-height:  100vh;
+
+    background-color:  var(--background-color);
+    color: var(--constrasting-color-1);
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+input[type="radio"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--background-color);
+    margin: 0;
+
+    font: inherit;
+    color: var(--constrasting-color-1);
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 50%;
+
+    transform: translateY(0.075em);
+    transition: 0.3s;
+
+    display: grid;
+    place-content: center;
+}
+
+input[type="radio"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--primary-color);
+}
+
+input[type="radio"]:checked::before {
+    transform: scale(1);
+}
+
+.width-50 {
+    width: 50%;
+}
+
+.ml-auto{
+    margin-left: auto;
+}
+
+.text-center{
+    text-align: center;
+}
+/* -------------------------------------------------------------------------- */
+
+
+
+/* ------------------------------ Progress bar ------------------------------ */
+.progressbar{
+    display: none;
+}
+
+.progressbar-active{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0 3rem;
+    counter-reset: step;
+}
+
+.progressbar::before, .progress{
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 4px;
+    width: 100%;
+    background-color: var(--constrasting-color-2);
+    z-index: -1;
+}
+
+.progress {
+    background-color:  var(--primary-color);
+    width: 0%;
+    transition: 0.3s;
+    
+}
+
+.progress-step{
+    width: 2.1875rem;
+    height: 2.1875rem;
+    background-color: var(--constrasting-color-2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: var(--background-color-2);
+}
+
+.progress-step::before{
+    counter-increment: step;
+    content: counter(step);
+}
+
+.progress-step::after{
+    content: attr(data-title);
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    
+    font-size:  0.85rem;
+}
+
+.progress-step-active {
+    background-color: var(--primary-color);
+    color: var(--constrasting-color-2);
+}
+/* -------------------------------------------------------------------------- */
+
+
+
+/* ---------------------------------- Form ---------------------------------- */
+.form {
+    width: 90%;
+    margin: 0 auto;
+    /* border: 1px solid var(--constrasting-color-1); */
+    border-radius: 0.35rem;
+    padding: 1.5rem;
+}
+
+.form-step{
+    display: none;
+    transform-origin: left;
+    animation: animate .25s;
+}
+
+.form-step-active{
+    display: block;
+}
+
+.input-group {
+    margin: 2rem 0;
+}
+
+@keyframes animate {
+    from {
+        transform: scale(0, 1);
+        opacity: 0;
+    }
+    
+    to {
+        transform: scale(1, 1);
+        opacity: 1;
+    }
+}
+/* -------------------------------------------------------------------------- */
+
+
+
+/* --------------------------------- Button --------------------------------- */
+.btns-group{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.btn {
+    padding: 0.75rem;
+    display: block;
+    text-decoration: none;
+    background-color: var(--primary-color);
+    color: #fff;
+    text-align: center;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover{
+    box-shadow: 0 0 0 2px var(--constrasting-color-1);
+}
+
+.btn-submit {
+    background-color: var(--constrasting-color-2);
+    color: var(--background-color)
+}
+
+/* .btn-submit:hover {
+    box-shadow: 0 0 0 2px var(--primary-color);
+} */
+/* -------------------------------------------------------------------------- */
+
+
+
+/* ------------------------------ Input fields ------------------------------ */
+.input-field {
+    display: block;
+    width: 100%;
+    padding: .75rem;
+    border: 1px solid var(--constrasting-color-1);
+    border-radius: 0.25rem;
+}
+
+.form-control {
+    /* font-family: system-ui, sans-serif; */
+    /* font-size: 1rem; */
+    /* font-weight: bold; */
+    line-height: 1.1;
+
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 1em;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 0.75rem;
+
+    transition: 0.25s;
+}
+
+.form-control:hover {
+    background-color: rgba(100, 100, 100);
+}
+
+.form-control-selected {
+    color: var(--primary-color);
+}
+/* -------------------------------------------------------------------------- */
+
+
+
+/* ------------------------------ Question Desc ----------------------------- */
+
+.question-desc {
+    font-weight: bold;
+    font-size:  1.25rem;
+    padding-left: 1rem;
+}
+/* -------------------------------------------------------------------------- */
+
+
+
+/* -------------------------------- Error msg ------------------------------- */
+.error-msg {
+    display: none;
+}
+
+.error-msg-active {
+    display: block;
+    text-align: center;
+    font-size: 1rem;
+    color: var(--primary-color)
+}
+/* -------------------------------------------------------------------------- */
+
+
+
+/* --------------------------------- Results -------------------------------- */
+.form-result {
+    display: none;
+}
+
+.form-result-active { 
+    display: grid;
+    height: 100%;
+
+    text-align: center;
+    color: var(--constrasting-color-1)
+}
+
+.result-imgs { 
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result-img {
+    max-width: 75%;
+    max-height: 75vh;
+    margin: auto;
+
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+    text-align: center;
+}
+
+.multicolortext {
+    background-image: linear-gradient(to left, violet, indigo, green, blue, yellow, orange, red);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
