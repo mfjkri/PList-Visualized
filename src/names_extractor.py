@@ -28,14 +28,25 @@ def get_names_that_matches_participants(participants: list) -> dict:
         name_segments = participant.split(' ')
 
         for segment in name_segments:
-            if len(segment) > 3:
+            if len(segment) >= 3:
                 for attendee in attendees_list:
+
                     if segment.lower() in attendee.lower():
                         present_participants_dict[participant].add(
                             attendee
                         ) if participant in present_participants_dict else present_participants_dict.update(
                             {participant: set([attendee])}
                         )
+
+                    attendee_segments = attendee.split(' ')
+                    for attendee_segment in attendee_segments:
+                        if len(attendee_segment) > 3:
+                            if attendee_segment.lower() in segment.lower():
+                                present_participants_dict[participant].add(
+                                    attendee
+                                ) if participant in present_participants_dict else present_participants_dict.update(
+                                    {participant: set([attendee])}
+                                )
 
     for participant, _ in present_participants_dict.items():
         present_participants_dict[participant] = list(
