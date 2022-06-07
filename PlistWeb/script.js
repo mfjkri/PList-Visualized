@@ -222,7 +222,7 @@ function main() {
   let attendeesFile = new XMLHttpRequest();
   let url = window.location.origin;
 
-  attendeesFile.open("GET", `${url}/PlistWeb/attendees.txt`, true);
+  attendeesFile.open("GET", `${url}/PlistWeb/attendees.json`, true);
   attendeesFile.send();
 
   attendeesFile.onreadystatechange = function () {

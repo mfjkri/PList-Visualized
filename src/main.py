@@ -27,7 +27,7 @@ def load_yaml_file(file_path: str) -> Union[Any, bool]:
 
 def updated_attendee_txt(present_participants_dict: dict) -> None:
 
-    attendees_json = os.path.join("PlistWeb", "attendees.txt")
+    attendees_json = os.path.join("PlistWeb", "attendees.json")
 
     matched_registered = list(present_participants_dict.keys())
 
